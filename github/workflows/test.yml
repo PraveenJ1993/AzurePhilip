@@ -1,20 +1,23 @@
-
-# File: .github/workflows/workflow.yml
+name: Azure Login and Deploy
 
 on:
-  workflow_dispatch:
-
-name: AzureLoginSample
+  push:
+    branches:
+      - main
 
 jobs:
-
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-    
-    - uses: azure/login@v1
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Login to Azure
+      uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_FUNCTIONS_PUBLISH_PROFILE }}
-    
-    - run: |
-        az webapp list --query "[?state=='Running']"
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy to Azure (replace with your deployment steps)
+      run: |
+        # Your deployment steps here
