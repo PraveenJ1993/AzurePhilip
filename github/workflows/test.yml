@@ -13,12 +13,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Azure Login
-      uses: Azure/login@v1
+     - name: Login to Azure
+      uses: azure/login@v1
       with:
-        creds: ${{ secrets.Zo-8Q~7DKng6sQTD18_Y3eG6K6z4O7lVqDtb9abF }}
-        tenant: ${{ secrets.3c779b11-51ee-4518-9db6-3e21636213c0 }}
-        servicePrincipal: ${{ secrets.07dc7366-e7fb-4dbf-802f-79c9dfe04dcb }}
-
+        creds: ${{ secrets.AZURE_FUNCTIONS_PUBLISH_PROFILE }}
+        
     - name: Display Azure Subscription
       run: az account show
