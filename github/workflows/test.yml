@@ -18,6 +18,10 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+    - name: Set Subscription
+      run: |
+        az account set --subscription <dade86f6-8a5b-4034-a239-7a407f6e1bf0>
+
     - name: Create Resource Group
       run: |
         az group create --name YourResourceGroupName --location YourLocation
