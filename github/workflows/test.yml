@@ -1,4 +1,4 @@
-name: Azure Login and Deploy
+name: Azure Login
 
 on:
   push:
@@ -6,18 +6,19 @@ on:
       - main
 
 jobs:
-  deploy:
+  login:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Login to Azure
-      uses: azure/login@v1
+    - name: Azure Login
+      uses: Azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{ secrets.Zo-8Q~7DKng6sQTD18_Y3eG6K6z4O7lVqDtb9abF }}
+        tenant: ${{ secrets.3c779b11-51ee-4518-9db6-3e21636213c0 }}
+        servicePrincipal: ${{ secrets.07dc7366-e7fb-4dbf-802f-79c9dfe04dcb }}
 
-    - name: Deploy to Azure (replace with your deployment steps)
-      run: |
-        # Your deployment steps here
+    - name: Display Azure Subscription
+      run: az account show
