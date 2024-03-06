@@ -16,6 +16,10 @@ jobs:
     - name: Set up Azure CLI
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_FUNCTIONS_PUBLISH_PROFILE }}
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Deploy Resources to Azure
+    - name: Deploy to Azure
+      run: |
+        # Your deployment steps here
+        az group create --name YourResourceGroupName --location YourLocation
+        # Add more commands as needed
