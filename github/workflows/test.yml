@@ -1,22 +1,33 @@
-name: Azure Login
+# File: .github/workflows/workflow.yml
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
+
+name: Run Azure Login without subscription
 
 jobs:
-  login:
+
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
 
-     - name: Login to Azure
-      uses: azure/login@v1
+    - name: Azure Login
+      uses: azure/login@v2
       with:
-        creds: ${{ secrets.AZURE_FUNCTIONS_PUBLISH_PROFILE }}
-        
-    - name: Display Azure Subscription
-      run: az account show
+        client-id: ${{ secrets.07dc7366-e7fb-4dbf-802f-79c9dfe04dcb }}
+        tenant-id: ${{ secrets.3c779b11-51ee-4518-9db6-3e21636213c0 }}
+        allow-no-subscriptions: true
+        enable-AzPSSession: true
+
+    - name: Azure CLI script
+      uses: azure/CLI@v1
+      with:
+        azcliversion: latest
+        inlineScript: |
+          az account show
+
+    - name: Run Azure PowerShell
+      uses: azure/powershell@v1
+      with:
+        azPSVersion: "latest"
+        inlineScript: |
+          Get-AzContext
