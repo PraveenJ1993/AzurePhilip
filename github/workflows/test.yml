@@ -1,23 +1,20 @@
-name: Create Resource Group
+
+# File: .github/workflows/workflow.yml
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+
+name: AzureLoginSample
 
 jobs:
-  create-resource-group:
+
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-
-    - name: Set up Azure CLI
-      uses: azure/login@v1
+    
+    - uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_FUNCTIONS_PUBLISH_PROFILE }}
-
-    - name: Set Subscription
-      run: |
-        az account set --subscription <dade86f6-8a5b-4034-a239-7a407f6e1bf0>
+    
+    - run: |
+        az webapp list --query "[?state=='Running']"
