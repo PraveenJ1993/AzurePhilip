@@ -1,32 +1,23 @@
 # File: .github/workflows/workflow.yml
 
+name: Run Azure Login with OIDC
 on: [push]
 
-name: Run Azure Login without subscription
-
-jobs:
-
+permissions:
+      id-token: write
+      contents: read
+jobs: 
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-
-    - name: Azure Login
-      uses: azure/login@v2
-      with:
-        creds: ${{ secrets.AZURE_FUNCTIONS_PUBLISH_PROFILE }}
-        allow-no-subscriptions: true
-        enable-AzPSSession: true
-
-    - name: Azure CLI script
-      uses: azure/CLI@v1
-      with:
-        azcliversion: latest
-        inlineScript: |
-          az account show
-
-    - name: Run Azure PowerShell
-      uses: azure/powershell@v1
-      with:
-        azPSVersion: "latest"
-        inlineScript: |
-          Get-AzContext
+      - name: Azure login
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_FUNCTIONS_PUBLISH_PROFILE }}
+  
+      - name: Azure CLI script
+        uses: azure/CLI@v1
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az account show
