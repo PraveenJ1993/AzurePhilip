@@ -17,9 +17,3 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_FUNCTIONS_PUBLISH_PROFILE }}
-
-    - name: Deploy to Azure
-      run: |
-        # Your deployment steps here
-        az group create --name YourResourceGroupName --location YourLocation
-        # Add more commands as needed
