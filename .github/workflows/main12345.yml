@@ -1,0 +1,3 @@
+- name: List Azure Subscriptions
+  run: |
+    az account list
