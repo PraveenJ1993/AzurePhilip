@@ -1,0 +1,23 @@
+name: Create Resource Group
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  create-resource-group:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Azure CLI
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Create Resource Group
+      run: |
+        az group create --name YourResourceGroupName --location YourLocation
